@@ -45,7 +45,7 @@ describe('resolver', function() {
     assert.strictEqual(output.default, 42);
   });
 
-  it('should print a diagnostic when a configured target field will overwrite an entry', async function() {
+  /*it('should print a diagnostic when a configured target field will overwrite an entry', async function() {
     let errorThrows = 0;
     const overwriteDirs = ['browser/', 'custom-target/', 'main/', 'module/'];
     for (const currDir of overwriteDirs) {
@@ -69,8 +69,111 @@ describe('resolver', function() {
       }
     }
     assert.deepEqual(errorThrows, overwriteDirs.length);
+  });*/
+
+  it('should print a diagnostic when a configured target field will overwrite an entry BROWSER', async function() {
+    let errorThrows = 0;
+    const overwriteDirs = ['browser/'];
+    for (const currDir of overwriteDirs) {
+      // eslint-disable-next-line no-console
+      console.log('currDir: ', currDir);
+      try {
+        await bundle(
+          path.join(
+            __dirname,
+            `integration/target-overwrite-source/${currDir}`,
+          ),
+        );
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log('error message: ', e.diagnostics[0].message);
+        errorThrows++;
+        assert.deepEqual(
+          e.diagnostics[0].message,
+          'Target is configured to overwrite source code.',
+        );
+      }
+    }
+    assert.deepEqual(errorThrows, overwriteDirs.length);
   });
 
+  it('should print a diagnostic when a configured target field will overwrite an entry CUSTOM-TARGET', async function() {
+    let errorThrows = 0;
+    const overwriteDirs = ['custom-target/'];
+    for (const currDir of overwriteDirs) {
+      // eslint-disable-next-line no-console
+      console.log('currDir: ', currDir);
+      try {
+        await bundle(
+          path.join(
+            __dirname,
+            `integration/target-overwrite-source/${currDir}`,
+          ),
+        );
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log('error message: ', e.diagnostics[0].message);
+        errorThrows++;
+        assert.deepEqual(
+          e.diagnostics[0].message,
+          'Target is configured to overwrite source code.',
+        );
+      }
+    }
+    assert.deepEqual(errorThrows, overwriteDirs.length);
+  });
+
+  it('should print a diagnostic when a configured target field will overwrite an entry MAIN', async function() {
+    let errorThrows = 0;
+    const overwriteDirs = ['main/'];
+    for (const currDir of overwriteDirs) {
+      // eslint-disable-next-line no-console
+      console.log('currDir: ', currDir);
+      try {
+        await bundle(
+          path.join(
+            __dirname,
+            `integration/target-overwrite-source/${currDir}`,
+          ),
+        );
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log('error message: ', e.diagnostics[0].message);
+        errorThrows++;
+        assert.deepEqual(
+          e.diagnostics[0].message,
+          'Target is configured to overwrite source code.',
+        );
+      }
+    }
+    assert.deepEqual(errorThrows, overwriteDirs.length);
+  });
+
+  it('should print a diagnostic when a configured target field will overwrite an entry MODULE', async function() {
+    let errorThrows = 0;
+    const overwriteDirs = ['module/'];
+    for (const currDir of overwriteDirs) {
+      // eslint-disable-next-line no-console
+      console.log('currDir: ', currDir);
+      try {
+        await bundle(
+          path.join(
+            __dirname,
+            `integration/target-overwrite-source/${currDir}`,
+          ),
+        );
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log('error message: ', e.diagnostics[0].message);
+        errorThrows++;
+        assert.deepEqual(
+          e.diagnostics[0].message,
+          'Target is configured to overwrite source code.',
+        );
+      }
+    }
+    assert.deepEqual(errorThrows, overwriteDirs.length);
+  });
   it('should throw an error on Webpack loader imports', async function() {
     let didThrow = false;
     try {

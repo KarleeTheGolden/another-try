@@ -1,0 +1,5 @@
+jobs:
+- template: azure-pipelines-template.yml
+  parameters:
+   name: Windows
+   vmImage: windows-latest

@@ -95,7 +95,7 @@ async function run({input, api, options}: RunOpts) {
     if (
       currTarget.name !== 'default' &&
       currTarget.distEntry != null &&
-      currTarget.distDir + '/' + currTarget.distEntry === input.filePath
+      path.join(currTarget.distDir, currTarget.distEntry) === input.filePath
     ) {
       throw new ThrowableDiagnostic({
         diagnostic: {
